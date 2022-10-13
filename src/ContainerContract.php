@@ -19,29 +19,21 @@ use Psr\Container\ContainerInterface;
  * Interface ContainerContract
  *
  * @package   Limbo\Contracts\Container
- * @author    dr0n1k <a.dronov4job@yandex.ru>
- * @copyright TheLimbo 2022
+ * @author    dr0n1k  <a.dronov4job@yandex.ru>
  * @license   MIT
+ * @copyright TheLimbo (c) 2022
  */
 interface ContainerContract extends ContainerInterface, ArrayAccess, Countable
 {
     /**
-     * Bind entry in container.
+     * Add entry in container.
      *
      * @param string     $id
      * @param mixed|null $concrete
+     * @param bool       $share
      * @return DefinitionContract
      */
-    public function bind(string $id, mixed $concrete = null): DefinitionContract;
-
-    /**
-     * Bind shared entry in container.
-     *
-     * @param string     $id
-     * @param mixed|null $concrete
-     * @return DefinitionContract
-     */
-    public function shared(string $id, mixed $concrete = null): DefinitionContract;
+    public function add(string $id, mixed $concrete = null, bool $share = false): DefinitionContract;
 
     /**
      * Get new or exists entry value from container by id.
@@ -90,13 +82,6 @@ interface ContainerContract extends ContainerInterface, ArrayAccess, Countable
      * @return iterable<DefinitionContract>
      */
     public function definitions(): iterable;
-
-    /**
-     * Get all bound entries values in container.
-     *
-     * @return iterable
-     */
-    public function entries(): iterable;
 
     /**
      * Get count size of bound definitions in container.
